@@ -2,7 +2,7 @@
 title: 'Welcome Bee starter'
 date: 2020-07-04 12:21:13
 category: 'development'
-draft: false
+draft: true
 ---
 
 ![](./images/hello.png)
@@ -32,23 +32,23 @@ draft: false
    2-1. Use inline highlighting
 
 ```js{3}
-import React from 'react'
+import React from 'react';
 
-const TEMPLATE = 'gatsby-starter-bee'
+const TEMPLATE = 'gatsby-starter-bee';
 
 class Foo extends React.Component {
   handleClick = val => {
     if (val === 'bar') {
-      return 1
+      return 1;
     } else if (val !== 'zoo') {
-      return 2
+      return 2;
     }
-    console.log(`clicked`)
-    return 3
-  }
+    console.log(`clicked`);
+    return 3;
+  };
 
   render() {
-    return <div>Welcome, Gatsby, ${TEMPLATE}</div>
+    return <div>Welcome, Gatsby, ${TEMPLATE}</div>;
   }
 }
 ```
@@ -72,7 +72,7 @@ _code_
 
 **bold** _italic_
 
-## 4. Support emoji :rocket:
+## 4. Support emoji :rocket
 
 Based on [emojione](https://github.com/emojione/emojione) :pray:
 

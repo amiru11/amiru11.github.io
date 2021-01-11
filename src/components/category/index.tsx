@@ -1,10 +1,13 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useEffect, useState } from 'react';
 import { rhythm } from '../../utils/typography';
 import './index.scss';
 import { Item } from './item';
 
 export const Category = ({ categories, category, selectCategory }) => {
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLUListElement>(null);
+  const [isMouseDown, setIsMouseDown] = useState<boolean>(false);
+  const [startX, setStartX] = useState<number>(0);
+  const [scrollLeft, setScrollLeft] = useState<number>(0);
 
   const scrollToCenter = useCallback(
     tabRef => {
@@ -20,6 +23,35 @@ export const Category = ({ categories, category, selectCategory }) => {
     [containerRef],
   );
 
+  const handleMouseDown = (event: React.MouseEvent<HTMLUListElement>) => {
+    if (containerRef.current) {
+      const { offsetLeft, scrollLeft } = containerRef.current;
+      setStartX(event.pageX - offsetLeft);
+      setScrollLeft(scrollLeft);
+      setIsMouseDown(true);
+    }
+  };
+  const handleMouseLeave = (): void => {
+    setIsMouseDown(false);
+  };
+  const handleMouseUp = (): void => {
+    setIsMouseDown(false);
+  };
+  const handleMouseMove = (event: React.MouseEvent<HTMLUListElement>) => {
+    if (!isMouseDown) return;
+    event.preventDefault();
+
+    if (containerRef.current) {
+      const { offsetLeft } = containerRef.current;
+      const currentX = event.pageX - offsetLeft;
+      const walk = (currentX - startX) * 1; //scroll-fast
+      containerRef.current.scrollTo({
+        left: scrollLeft - walk,
+        behavior: 'smooth',
+      });
+    }
+  };
+
   return (
     <ul
       ref={containerRef}
@@ -29,6 +61,10 @@ export const Category = ({ categories, category, selectCategory }) => {
       style={{
         margin: `0 -${rhythm(3 / 4)}`,
       }}
+      onMouseDown={handleMouseDown}
+      onMouseLeave={handleMouseLeave}
+      onMouseUp={handleMouseUp}
+      onMouseMove={handleMouseMove}
     >
       <Item title={'All'} selectedCategory={category} onClick={selectCategory} scrollToCenter={scrollToCenter} />
       {categories.map((title, idx) => (
