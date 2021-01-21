@@ -12,7 +12,7 @@ module.exports = {
     linkedin: ``, // Your LinkedIn account
   },
   icon: `content/assets/favicon.png`, // Add your favicon
-  keywords: [`blog`],
+  keywords: [`blog`, `javascript`],
   comment: {
     disqusShortName: '', // Your disqus-short-name. check disqus.com.
     utterances: '', // Your repository for archive comment

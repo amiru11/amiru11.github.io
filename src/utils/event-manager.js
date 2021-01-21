@@ -1,29 +1,26 @@
-export function toFit(
-  cb,
-  { dismissCondition = () => false, triggerCondition = () => true }
-) {
+export function toFit(cb, { dismissCondition = () => false, triggerCondition = () => true }) {
   if (!cb) {
-    throw Error('Invalid required arguments')
+    throw Error('Invalid required arguments');
   }
 
-  let tick = false
+  let tick = false;
 
   return function() {
     if (tick) {
-      return
+      return;
     }
 
-    tick = true
+    tick = true;
     return requestAnimationFrame(() => {
       if (dismissCondition()) {
-        tick = false
-        return
+        tick = false;
+        return;
       }
 
       if (triggerCondition()) {
-        tick = false
-        return cb()
+        tick = false;
+        return cb();
       }
-    })
-  }
+    });
+  };
 }
