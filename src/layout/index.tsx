@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { Top } from '../components/top';
-import { Header } from '../components/header';
 import { ThemeSwitch } from '../components/theme-switch';
+import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 import { rhythm } from '../utils/typography';
 
