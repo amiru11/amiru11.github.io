@@ -3,7 +3,7 @@ import * as Storage from '../utils/storage';
 
 export function useRenderedCount() {
   const initialCount = Storage.getCount(1);
-  const [count, setCount] = useState(initialCount);
+  const [count, setCount] = useState<number>(initialCount);
   const countRef = useRef(count);
   const increaseCount = () => setCount(prev => prev + 1);
 
